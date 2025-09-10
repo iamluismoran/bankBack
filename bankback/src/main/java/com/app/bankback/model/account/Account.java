@@ -55,6 +55,8 @@ public abstract class Account {
     @JoinColumn(name = "primary_owner_id", nullable = false)
     private AccountHolder primaryOwner;
 
+    /** Titular secundario */
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "secondary_owner_id")
     private AccountHolder secondaryOwner;
@@ -63,29 +65,28 @@ public abstract class Account {
 
     /**
      * Fecha de creación de la cuenta, por defecto hoy
-     * Se puede setear explícitamente al crear la cuenta si asi se quiere
+     * Se puede setear  al crear la cuenta si asi se quiere
      */
 
     @Column(name = "creation_date", nullable = false)
     private LocalDate creationDate = LocalDate.now();
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 8)
+    @Column(nullable = false, length = 12)
     private AccountStatus status = AccountStatus.ACTIVE;
 
     // -------------------- Constructores de conveniencia --------------------
 
-    /**
-     * Ctor para crear una cuenta con saldo y dueño principal
-     * Deja penaltyFee=40, creationDate=today, status=ACTIVE por defecto
-     */
+    /** Crea cuenta con saldo y dueño principal */
 
     protected Account(Money balance, AccountHolder primaryOwner) {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
     }
 
-    private Account(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
+    /** Crea cuenta con saldo, dueño principal y secundario */
+
+    protected Account(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         this.secondaryOwner = secondaryOwner;
