@@ -2,7 +2,6 @@ package com.app.bankback.model.value;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,6 @@ import java.math.RoundingMode;
 @Embeddable
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Money {
 
     @Column(precision = 19, scale = 2, nullable = false)
@@ -27,23 +25,25 @@ public class Money {
 
     }
 
-    // Suma otro Money (devuelve NUEVO Money; no muta this) //
+    /** Suma otro Money (devuelve NUEVO Money; no muta this) */
     public Money add(Money other) {
         return new Money(this.amount.add(other.amount));
     }
 
-    // Resta otro Money (devuelve NUEVO Money) //
+    /** Resta otro Money (devuelve NUEVO Money) */
 
     public Money subtract(Money other) {
         return new Money(this.amount.subtract(other.amount));
     }
 
-    // Multiplica por un factor (intereses/fees) //
+    /** Multiplica por un factor (intereses/fees) */
     public Money multiply(BigDecimal factor) {
         return new Money(this.amount.multiply(factor));
     }
 
-    // Ajusta a 2 decimales con redondeo bancario //
+    /** Ajusta a 2 decimales con redondeo bancario (HALF_EVEN)
+     * ("round half to even")
+     */
     public Money scaled() {
         return new Money(this.amount.setScale(2, RoundingMode.HALF_EVEN));
     }
