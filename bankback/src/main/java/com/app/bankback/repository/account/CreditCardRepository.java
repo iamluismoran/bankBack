@@ -1,4 +1,7 @@
 package com.app.bankback.repository.account;
 
-public interface CreditCardRepository {
+import com.app.bankback.model.account.CreditCard;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
 }

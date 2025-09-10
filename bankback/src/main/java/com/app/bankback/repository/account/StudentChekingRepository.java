@@ -1,4 +1,7 @@
 package com.app.bankback.repository.account;
 
-public interface StudentChekingRepository {
+import com.app.bankback.model.account.StudentChecking;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentChekingRepository extends JpaRepository<StudentChecking, Long> {
 }
