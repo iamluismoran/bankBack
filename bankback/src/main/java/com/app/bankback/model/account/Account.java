@@ -42,7 +42,7 @@ public abstract class Account {
     @Embedded
     @AttributeOverride(name = "amount",
     column = @Column(name = "penalty_free_amount", precision = 19, scale = 2, nullable = false))
-    private Money penaltyFree = Money.of(40);
+    private Money penaltyFee = Money.of(40);
 
     // -------------------- Propietarios --------------------
 

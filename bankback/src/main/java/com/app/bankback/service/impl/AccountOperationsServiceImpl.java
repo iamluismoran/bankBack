@@ -100,7 +100,7 @@ public class AccountOperationsServiceImpl implements AccountOperationsService {
     }
 
     /** Penalty si (Checking/Savings) cae bajo el mínimo tras la operación */
-    private void applyPenaltyIfBelowMinimun(Account acc) {
+    private void applyPenaltyIfBelowMinimum(Account acc) {
         if (acc instanceof Checking ch) {
             if (ch.getBalance().lt(ch.getMinimumBalance())) {
                 ch.setBalance(ch.getBalance().subtract(acc.getPenaltyFree()).scaled());
