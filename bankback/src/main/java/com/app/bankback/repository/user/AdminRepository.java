@@ -1,4 +1,11 @@
 package com.app.bankback.repository.user;
 
-public interface AdminRepository {
+import com.app.bankback.model.user.Admin;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface AdminRepository extends JpaRepository<Admin, Long> {
+
+    Optional<Admin> findByIgnoreCase(String name);
 }

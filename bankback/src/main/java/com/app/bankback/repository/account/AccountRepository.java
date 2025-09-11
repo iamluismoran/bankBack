@@ -21,7 +21,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     /**
      * Verifica acceso: ¿esta cuenta pertenece (como primary o secondary) a ownerId?
      */
-    @Query(("""
+    @Query("""
            SELECT CASE WHEN COUNT(a) > 0 THEN true ELSE false END
            FROM Account a
            WHERE a.id = :accountId
