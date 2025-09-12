@@ -1,4 +1,4 @@
 package com.app.bankback.controller;
 
-public class AdminController {
+public class AdminAccountsController {
 }
