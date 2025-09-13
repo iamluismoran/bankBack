@@ -26,7 +26,7 @@ public class AccountOperationsServiceImpl implements AccountOperationsService {
     private final AccountRepository accountRepository;
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Money getBalance(Long accountId) {
         Account acc = accountRepository.findById(accountId)
                 .orElseThrow(() -> new EntityNotFoundException("Account not found: " + accountId));
@@ -60,7 +60,7 @@ public class AccountOperationsServiceImpl implements AccountOperationsService {
         from.setBalance(from.getBalance().subtract(amount).scaled());
         to.setBalance(to.getBalance().add(amount).scaled());
 
-        applyPenaltyIfBelowMinimun(from);
+        applyPenaltyIfBelowMinimum(from);
 
         accountRepository.save(from);
         accountRepository.save(to);
@@ -71,7 +71,7 @@ public class AccountOperationsServiceImpl implements AccountOperationsService {
 
     private void applyAccruedInterestIfNeeded(Account acc) {
         if (acc instanceof Savings s) {
-            LocalDate last = (s.getLastInterestDate() != null) ? s.getLastInteresDate() : s.getCreationDate();
+            LocalDate last = (s.getLastInterestDate() != null) ? s.getLastInterestDate() : s.getCreationDate();
             long years = ChronoUnit.YEARS.between(last, LocalDate.now());
             if (years > 0) {
                 BigDecimal rate = s.getInterestRate();
@@ -103,11 +103,11 @@ public class AccountOperationsServiceImpl implements AccountOperationsService {
     private void applyPenaltyIfBelowMinimum(Account acc) {
         if (acc instanceof Checking ch) {
             if (ch.getBalance().lt(ch.getMinimumBalance())) {
-                ch.setBalance(ch.getBalance().subtract(acc.getPenaltyFree()).scaled());
+                ch.setBalance(ch.getBalance().subtract(acc.getPenaltyFee()).scaled());
             }
         } else if (acc instanceof Savings s) {
             if (s.getBalance().lt(s.getMinimumBalance())) {
-                s.setBalance(s.getBalance().subtract(acc.getPenaltyFree()).scaled());
+                s.setBalance(s.getBalance().subtract(acc.getPenaltyFee()).scaled());
             }
         }
     }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @DiscriminatorValue("SAVINGS")
@@ -30,6 +31,10 @@ public class Savings extends Account{
 
     @Column(name = "interest_rate", precision = 5, scale = 4, nullable = false)
     private BigDecimal interestRate = new BigDecimal("0.0025");
+
+    /** Última fecha en la que se aplicaron intereses anuales*/
+    @Column(name = "last_interest_date")
+    private LocalDate lastInterestDate;
 
     // -------------------- Constructores --------------------
 

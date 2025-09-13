@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AccountHolder extends User {
 
-    @Column(name = "date_of_birth", nullable = false)
+    @Column(name = "date_of_birth", nullable = true)
     private LocalDate dateOfBirth;
 
     @Embedded

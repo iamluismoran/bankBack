@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @DiscriminatorValue("CREDIT_CARD")
@@ -27,6 +28,10 @@ public class CreditCard extends Account{
 
     @Column(name = "interest_rate", precision = 4, scale = 3, nullable = false)
     private BigDecimal interestRate = new BigDecimal("0.200");
+
+    /** Última fecha en la que se aplicaron interes mensuales*/
+    @Column(name = "last_interest_date")
+    private LocalDate lastInterestDate;
 
     // -------------------- Constructores --------------------
 

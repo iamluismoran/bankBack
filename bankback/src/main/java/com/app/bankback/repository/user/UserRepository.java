@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<AccountHolder> findByNameIgnoreCase(String name);
 
     /** Búsqueda parcial por nombre */
-    List<AccountHolder> findByContainingIgnoreCase(String fragment);
+    List<AccountHolder> findByNameContainingIgnoreCase(String fragment);
 }

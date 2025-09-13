@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ThirdParty extends User{
 
-    @Column(name = "hashed_key", nullable = false, unique = true, length = 64)
+    @Column(name = "hashed_key", nullable = true, unique = true, length = 64)
     private String hashedKey;
 
     public ThirdParty(String name, String hashedKey) {
