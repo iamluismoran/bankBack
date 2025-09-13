@@ -16,7 +16,7 @@ public class AccountsController {
 
     private final AccountOperationsService ops;
 
-    /** GET balance aplicando intereses si corresponde. */
+    /** GET balance aplicando intereses si corresponde */
     @GetMapping("/{id}/balance")
     public ResponseEntity<Map<String, Object>> getBalance(@PathVariable("id") Long accountId) {
         var balance = ops.getBalance(accountId);
@@ -26,6 +26,8 @@ public class AccountsController {
         ));
     }
 
+    /** POST transferencia entre cuentas (valida ownership, fondos, penalty…) */
+    @PostMapping("/transfer")
     public ResponseEntity<Void> transfer(@RequestBody TransferRequest request) {
         ops.transfer(
                 request.getFromAccountId(),
