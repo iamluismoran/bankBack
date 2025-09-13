@@ -57,7 +57,7 @@ public abstract class Account {
 
     /** Titular secundario */
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "secondary_owner_id", nullable = true)
     private AccountHolder secondaryOwner;
 

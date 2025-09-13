@@ -24,18 +24,19 @@ public class ThirdPartyController {
                 hashedKey,
                 request.getAccountId(),
                 request.getAccountSecretKey(),
-                Money.of(request.getAmount().doubleValue())
+                Money.of(request.getAmount())
         );
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/withdraw")
     public ResponseEntity<Void> withdraw(@RequestHeader(HEADER) String hashedKey,
                                          @RequestBody ThirdPartyMovementRequest request) {
         thirdPartyService.thirdPartyWithdraw(
                 hashedKey,
                 request.getAccountId(),
                 request.getAccountSecretKey(),
-                Money.of(request.getAmount().doubleValue())
+                Money.of(request.getAmount())
         );
         return ResponseEntity.noContent().build();
     }

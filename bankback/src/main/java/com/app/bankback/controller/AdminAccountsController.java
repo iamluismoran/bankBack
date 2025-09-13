@@ -24,7 +24,7 @@ public class AdminAccountsController {
 
     @PostMapping("/checking-or-student")
     public ResponseEntity<Account> createCheckingOrStudent(@RequestBody CreateCheckingRequest request) {
-        Money initial = Money.of(request.getInitialAmount().doubleValue());
+        Money initial = Money.of(request.getInitialAmount());
         Account created = factory.createCheckingOrStudent(
                 request.getPrimaryOwnerId(),
                 request.getSecondaryOwnerId(),

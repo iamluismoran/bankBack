@@ -32,7 +32,7 @@ public class AccountsController {
         ops.transfer(
                 request.getFromAccountId(),
                 request.getToAccountId(),
-                Money.of(request.getAmount().doubleValue()),
+                Money.of(request.getAmount()),
                 request.getRequestOwnerId()
         );
         return ResponseEntity.noContent().build();

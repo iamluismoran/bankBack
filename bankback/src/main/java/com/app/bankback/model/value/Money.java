@@ -17,12 +17,18 @@ public class Money {
     private BigDecimal amount;
 
     public Money(BigDecimal amount) {
-        this.amount = amount;
+        if (amount == null) throw new IllegalArgumentException("amount cannot be null");
+        this.amount = amount.setScale(2, RoundingMode.HALF_EVEN);
     }
 
+    /** Para evitar conversiones a double */
+    public static Money of(BigDecimal value) {
+        return new Money(value);
+    }
+
+    /** Por compatibilidad */
     public static Money of(double value) {
         return new Money(BigDecimal.valueOf(value));
-
     }
 
     /** Suma otro Money (devuelve NUEVO Money; no muta this) */
@@ -38,6 +44,7 @@ public class Money {
 
     /** Multiplica por un factor (intereses/fees) */
     public Money multiply(BigDecimal factor) {
+        if (factor == null) throw new IllegalArgumentException("factor cannot be null");
         return new Money(this.amount.multiply(factor));
     }
 

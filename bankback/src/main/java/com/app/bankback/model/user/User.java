@@ -14,7 +14,7 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(onlyExplicitlyIncluded = false)
+@ToString(onlyExplicitlyIncluded = true)
 public abstract class User {
 
     @Id
