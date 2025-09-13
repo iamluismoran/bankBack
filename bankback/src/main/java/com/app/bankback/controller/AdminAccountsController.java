@@ -3,17 +3,18 @@ package com.app.bankback.controller;
 import com.app.bankback.dto.account.CreateCheckingRequest;
 import com.app.bankback.dto.account.CreateCreditCardRequest;
 import com.app.bankback.dto.account.CreateSavingsRequest;
+import com.app.bankback.enums.AccountStatus;
 import com.app.bankback.model.account.Account;
 import com.app.bankback.model.account.CreditCard;
 import com.app.bankback.model.account.Savings;
 import com.app.bankback.model.value.Money;
+import com.app.bankback.repository.account.AccountRepository;
 import com.app.bankback.service.interfaces.AccountFactoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/admin/accounts")
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminAccountsController {
 
     private final AccountFactoryService factory;
+    private final AccountRepository accounts;
 
     @PostMapping("/checking-or-student")
     public ResponseEntity<Account> createCheckingOrStudent(@RequestBody CreateCheckingRequest request) {
@@ -66,5 +68,23 @@ public class AdminAccountsController {
                 rate
         );
         return ResponseEntity.ok(created);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Void> updateStatus(@PathVariable Long id, @RequestParam("status") AccountStatus status) {
+        var acc = accounts.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        acc.setStatus(status);
+        accounts.save(acc);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id]")
+    public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+        if (!accounts.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
+        }
+        accounts.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
