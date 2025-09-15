@@ -79,7 +79,7 @@ public class AdminAccountsController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id]")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
         if (!accounts.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");

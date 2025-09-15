@@ -76,7 +76,7 @@ public class DataInitializer implements CommandLineRunner {
 
         ThirdParty tp = new ThirdParty();
         tp.setName("Third Party API");
-        tp.setHashedKey("TP-AB12CD34EF56GH78IJ90");
+        tp.setHashedKey("TP-AB12CD34E");
         tp = userRepository.save(tp);
 
         System.out.println("++++++++ Users inserted: Felipe, Sofia, Eve, Third Party");
