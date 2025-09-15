@@ -10,8 +10,10 @@ import com.app.bankback.repository.account.AccountRepository;
 import com.app.bankback.service.interfaces.AccountOperationsService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -29,8 +31,9 @@ public class AccountOperationsServiceImpl implements AccountOperationsService {
     @Transactional
     public Money getBalance(Long accountId) {
         Account acc = accountRepository.findById(accountId)
-                .orElseThrow(() -> new EntityNotFoundException("Account not found: " + accountId));
-
+                .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, "Account " + accountId + " id not found"
+                        ));
         applyAccruedInterestIfNeeded(acc);
         return acc.getBalance();
     }

@@ -1,4 +1,4 @@
-# BankBack
+# **BankBack**
 
 ## Descripción del Proyecto
 
@@ -87,28 +87,4 @@ Permite la gestión de cuentas bancarias, usuarios y operaciones básicas como c
 ## Autor del Proyecto
 - Autor: Luis Elías Morán
 - GitHub: [iamluismoran](https://github.com/iamluismoran)
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 🧩 Arquitectura del Proyecto
-
-El sistema se organiza en las siguientes clases y paquetes:
-
-- `Book`: Representa un libro con ISBN, título, categoría y cantidad disponible.
-- `Author`: Representa al autor de un libro (relación uno a uno).
-- `Student`: Representa a un estudiante con su USN (número de estudiante) y nombre.
-- `Issue`: Registra un préstamo de libro, incluyendo fechas y referencias al estudiante y libro involucrados.
-- **Repositorios**: Clases como `BookRepository`, `IssueRepository`, etc., se encargan de la persistencia de datos en archivos CSV.
-- **Pruebas**: Tests unitarios realizados con JUnit 5 para asegurar la correcta funcionalidad del sistema.
-
 
