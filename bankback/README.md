@@ -68,7 +68,7 @@ Permite la gestión de cuentas bancarias, usuarios y operaciones básicas como c
 
 
 ## Enlaces adicionales
-- [Presentación del proyecto]()
+- [Presentación del proyecto](https://docs.google.com/presentation/d/1_Zk3B_wWTnL4LkyzW1YiJHTvI_6T4GpUD-CT_d2QagM/edit?usp=sharing)
 
 
 ## Trabajo futuro
