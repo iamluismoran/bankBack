@@ -65,7 +65,6 @@ public class AccountDetail {
         private LocalDate lastInterestDate;
     }
     // Para distinguir el tipo en JSON con {}
-    @Data @NoArgsConstructor @AllArgsConstructor @Builder
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class StudentCheckingInfo {}
 }
